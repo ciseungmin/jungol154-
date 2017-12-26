@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>154번 변형</title>
+	<script type="text/javascript" src="../js/새 폴더/common.js">
+		
+	</script>
+</head>
+<body>
+<h3>N명의 몸무게를 입력 받아 몇명의 평균값인지 출력하시오</h3>
+
+<h2>풀이 -------------------------------------------------</h2>
+    <!-- 문제 풀기 -->
+    <!--입력부-->
+    Number1 : <input type="text" id="input1" onkeyup="validateKey(event)"/></p>
+    <button onclick="solve154()">입력</button>
+    <!--출력부-->
+    <p id="result154"></p>
+    <script>
+        function validateKey(event){
+            var keyCode = event.which? event.which : event.keyCode;
+            console.log("keyCode : " + keyCode);
+
+            // 숫자, '.', 공백(space), backspace 이외 입력 되었을 때
+            /*
+            입력 가능한 값 : 키패드의 번호(0~9:96~105), 
+                          일반 번호(0~9:48~57),
+                          소수점('.':190),
+                          공백(' ':32), 
+                          backspace(<- : 8) 
+            */
+            var validKeys = "48,49,50,51,52,53,54,55,56,57,96,97,98,99,100,101,102,103,104,105,190,8,32";
+
+            console.log("search value : " + validKeys.search(keyCode));
+            if(validKeys.search(keyCode) <= -1) {
+                alert('invalidKey! : ' + keyCode);
+                var inputStr = getStringOfTag('input1');
+                var validateStr = deleteLastChar(inputStr);
+                setInputValue('input1',validateStr);
+            }
+        }
+
+        function solve154(){
+            var input1 = new String(getStringOfTag('input1'));
+
+            var kgArr = input1.split(" ");
+            var sum = 0;
+            for (var i = 0; i < kgArr.length; i++) {
+                sum += Number(kgArr[i]);
+            }
+
+            var avg = sum / kgArr.length;
+
+            printResult('result154',"인원수 : " + kgArr.length + "<br/>" + "평균 : " + avg.toFixed(1));
+        }
+    </script>
+
+</body>
+</html>
